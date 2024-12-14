@@ -34,7 +34,7 @@ public class AdminMenuHandler {
     }
 
     public ProgramStep handleAdminTeamMenu() {
-        int selectedOption = getAdminTeamMenu(scanner);
+        int selectedOption = getTeamMenu(scanner);
 
         return switch (selectedOption) {
             case 1 -> ProgramStep.CARDS_MENU;
@@ -46,7 +46,7 @@ public class AdminMenuHandler {
     }
 
     public ProgramStep handleAdminTeamOperationsMenu(Team team) {
-        int selectedOption = getTeamMenu(scanner, team);
+        int selectedOption = getTeamOptionsMenu(scanner, team);
 
         return switch (selectedOption) {
             case 1 -> handleRegisterTeamAttendant(team);
@@ -98,7 +98,7 @@ public class AdminMenuHandler {
         return option;
     }
 
-    private int getAdminTeamMenu(Scanner scanner) {
+    private int getTeamMenu(Scanner scanner) {
         System.out.println();
         System.out.println("Selecione uma opção: ");
         System.out.println("1. Cartões");
@@ -123,7 +123,7 @@ public class AdminMenuHandler {
         return option;
     }
 
-    private int getTeamMenu(Scanner scanner, Team team) {
+    private int getTeamOptionsMenu(Scanner scanner, Team team) {
         System.out.println();
         System.out.println("Time " + team.getDepartment() + " => Selecione uma opção: ");
         System.out.println("1. Cadastrar novo atendente");
@@ -173,7 +173,7 @@ public class AdminMenuHandler {
         int selectedOption = getTeamAttendants(scanner, team);
 
         if (selectedOption == 1) {
-            getTeamAttendantRequest(scanner, team);
+            return getTeamAttendantRequests(scanner, team);
         }
 
         return ProgramStep.ADMIN_TEAM_MENU;
@@ -218,7 +218,7 @@ public class AdminMenuHandler {
         return team.getAttendants();
     }
 
-    private void getTeamAttendantRequest(Scanner scanner, Team team) {
+    private ProgramStep getTeamAttendantRequests(Scanner scanner, Team team) {
         System.out.println();
         System.out.print("Copie e cole o identificador do atendente: ");
 
@@ -234,15 +234,7 @@ public class AdminMenuHandler {
             }
 
             if (attendant != null) {
-                List<Request> attendantRequests = listTeamAttendantRequests(attendant);
-                if (attendantRequests != null) {
-                    System.out.println();
-                    System.out.println("Fila de solicitações do atendente " + attendant.getName());
-                    System.out.println(attendantRequests);
-                } else {
-                    System.out.println();
-                    System.out.println("Sem solicitações para o atendente " + attendant.getName());
-                }
+                return listAttendantRequests(attendant, team);
             } else {
                 System.out.println();
                 System.out.println("Atendente não encontrado!");
@@ -250,9 +242,74 @@ public class AdminMenuHandler {
         } catch (IllegalArgumentException ex) {
             System.out.println("Identificador inválido. Retornando ao menu de times...");
         }
+        return ProgramStep.ADMIN_TEAM_MENU;
     }
 
-    private List<Request> listTeamAttendantRequests(Attendant attendant) {
-        return attendant.getRequests();
+    private ProgramStep listAttendantRequests(Attendant attendant, Team team) {
+        List<Request> attendantRequests = attendant.getRequests();
+        System.out.println();
+        if (attendantRequests != null) {
+            System.out.println(attendantRequests);
+            System.out.println();
+            int selectedOption = handleAttendantRequest();
+            if (selectedOption == 1) {
+                return completeAttendantRequest(scanner, attendantRequests, team);
+            }
+        } else {
+            System.out.println("Sem solicitações para o atendente " + attendant.getName());
+        }
+
+        return ProgramStep.ADMIN_TEAM_MENU;
+    }
+
+    private int handleAttendantRequest() {
+        System.out.println("Deseja finalizar alguma solicitação?");
+        System.out.println("1. Sim");
+        System.out.println("2. Não");
+
+        List<Integer> validOptions = Arrays.asList(1, 2);
+        int option = 0;
+
+        while (!validOptions.contains(option)) {
+            try {
+                System.out.print("Opção a selecionar (selecione um número): ");
+                option = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException ex) {
+                System.out.println("Digite um número de 1 a 2.");
+                scanner.nextLine();
+            }
+        }
+
+        return option;
+    }
+
+    private ProgramStep completeAttendantRequest(Scanner scanner, List<Request> attendantRequests, Team team) {
+        System.out.print("Copie e cole o identificador da solicitação: ");
+        UUID attendantRequestId = UUID.fromString(scanner.nextLine());
+
+        for (int i = 0; i < attendantRequests.size(); i++) {
+            Request attendantRequest = attendantRequests.get(i);
+            if (attendantRequest.getId().equals(attendantRequestId)) {
+                System.out.println("Concluindo solicitação do cliente " + attendantRequest.getCustomerName());
+                attendantRequests.remove(attendantRequest);
+            }
+        }
+
+        while (canTranferRequest(attendantRequests, team)) {
+            Queue<Request> teamRequests = team.getRequests();
+            if (!teamRequests.isEmpty()) {
+                Request requestToBeAddedIntoAttendantRequestsList = teamRequests.poll();
+                System.out.println("Retirando solicitação da fila do time e inserindo na lista do atendente...");
+                attendantRequests.add(requestToBeAddedIntoAttendantRequestsList);
+            }
+        }
+
+        return ProgramStep.ADMIN_TEAM_MENU;
+    }
+
+    private boolean canTranferRequest(List<Request> attendantRequests, Team team) {
+        Queue<Request> teamRequests = team.getRequests();
+        return attendantRequests.size() < 3 && !teamRequests.isEmpty();
     }
 }

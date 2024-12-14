@@ -19,7 +19,7 @@ public class CustomerMenuHandler {
 
         return switch (customerOption) {
             case 1 -> ProgramStep.CUSTOMER_REQUEST_MENU;
-            case 3 -> ProgramStep.MAIN_MENU;
+            case 2 -> ProgramStep.MAIN_MENU;
             default -> ProgramStep.CUSTOMER_MENU;
         };
     }
@@ -48,8 +48,7 @@ public class CustomerMenuHandler {
     private int getCustomerMenu(Scanner scanner) {
         System.out.println("Selecione uma opção: ");
         System.out.println("1. Abrir chamado");
-        System.out.println("2. Ver status de chamado");
-        System.out.println("3. Voltar para o menu principal");
+        System.out.println("2. Voltar para o menu principal");
 
         List<Integer> validOptions = Arrays.asList(1, 2, 3);
         int option = 0;
@@ -114,10 +113,17 @@ public class CustomerMenuHandler {
 
         if (!teamAttendants.isEmpty()) {
             for (Attendant attendant : teamAttendants) {
-                addRequestOnAttendantRequestsList(attendant, request);
+                if (attendant.getRequests().size() < 3) {
+                    addRequestOnAttendantRequestsList(attendant, request);
+                } else {
+                    System.out.println();
+                    System.out.println("Direcionando solicitação para fila de solicitações do time ");
+                    addRequestOnTeamRequestsQueue(team, request);
+                }
             }
         } else {
-            System.out.println("Adicionando solicitação na fila de solicitações do time para ser processada depois");
+            System.out.println();
+            System.out.println("Direcionando solicitação para fila de solicitações do time ");
             addRequestOnTeamRequestsQueue(team, request);
         }
     }
@@ -130,11 +136,9 @@ public class CustomerMenuHandler {
 
     private void addRequestOnAttendantRequestsList(Attendant attendant, Request request) {
         List<Request> attendantRequests = attendant.getRequests();
-        if (attendantRequests.size() < 3) {
-            System.out.println();
-            System.out.println("Direcionando solicitação para o atendente " + attendant.getName());
-            attendantRequests.add(request);
-            attendant.setRequests(attendantRequests);
-        }
+        System.out.println();
+        System.out.println("Direcionando solicitação para o atendente " + attendant.getName());
+        attendantRequests.add(request);
+        attendant.setRequests(attendantRequests);
     }
 }

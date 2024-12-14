@@ -10,7 +10,10 @@ public class Request {
     private String type;
     private String customerName;
 
-    public Request() {};
+    public Request() {
+    }
+
+    ;
 
     public Request(String description, String customerName) {
         this.id = UUID.randomUUID();
@@ -55,7 +58,10 @@ public class Request {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
-        return Objects.equals(id, request.id) && Objects.equals(description, request.description) && Objects.equals(type, request.type) && Objects.equals(customerName, request.customerName);
+        return Objects.equals(id, request.id) &&
+                Objects.equals(description, request.description) &&
+                Objects.equals(type, request.type) &&
+                Objects.equals(customerName, request.customerName);
     }
 
     @Override
