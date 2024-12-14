@@ -65,11 +65,11 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request{" +
+        return "Solicitação => {" +
                 "id=" + id +
-                ", description='" + description + '\'' +
-                ", type='" + type + '\'' +
-                ", customerName='" + customerName + '\'' +
+                ", descrição='" + description + '\'' +
+                ", tipo='" + type + '\'' +
+                ", cliente='" + customerName + '\'' +
                 '}';
     }
 }

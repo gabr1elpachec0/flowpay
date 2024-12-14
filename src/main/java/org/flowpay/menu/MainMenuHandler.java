@@ -26,6 +26,7 @@ public class MainMenuHandler {
     }
 
     private int getMainMenu(Scanner scanner) {
+        System.out.println();
         System.out.println("-------------------");
         System.out.println("BEM-VINDO À FLOWPAY");
         System.out.println("-------------------");

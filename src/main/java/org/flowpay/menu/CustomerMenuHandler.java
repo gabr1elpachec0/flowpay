@@ -1,6 +1,7 @@
 package org.flowpay.menu;
 
 import org.flowpay.ProgramStep;
+import org.flowpay.attendant.Attendant;
 import org.flowpay.request.Request;
 import org.flowpay.team.Team;
 
@@ -28,18 +29,15 @@ public class CustomerMenuHandler {
 
         switch (request.getType()) {
             case "Cartões" -> {
-                System.out.println("Adicionando solicitação ao time cards...");
-                addRequestOnQueue(teamsList.get(0), request);
+                distributeRequest(teamsList.get(0), request);
                 System.out.println("Chamado adicionado!");
             }
             case "Empréstimos" -> {
-                System.out.println("Adicionando solicitação ao time loans...");
-                addRequestOnQueue(teamsList.get(1), request);
+                distributeRequest(teamsList.get(1), request);
                 System.out.println("Chamado adicionado!");
             }
             case "Outros Assuntos" -> {
-                System.out.println("Adicionando solicitação ao time other subjects...");
-                addRequestOnQueue(teamsList.get(2), request);
+                distributeRequest(teamsList.get(2), request);
                 System.out.println("Chamado adicionado!");
             }
         }
@@ -71,7 +69,7 @@ public class CustomerMenuHandler {
     }
 
     private Request registerRequest(Scanner scanner) {
-        System.out.println("Preencha os dados a seguir para abrir um chamado:");
+        System.out.println("Preencha os dados a seguir para criar solicitação:");
 
         System.out.print("Nome: ");
         String customerName = scanner.nextLine();
@@ -111,9 +109,32 @@ public class CustomerMenuHandler {
         return request;
     }
 
-    private void addRequestOnQueue(Team team, Request request) {
+    private void distributeRequest(Team team, Request request) {
+        List<Attendant> teamAttendants = team.getAttendants();
+
+        if (!teamAttendants.isEmpty()) {
+            for (Attendant attendant : teamAttendants) {
+                addRequestOnAttendantRequestsList(attendant, request);
+            }
+        } else {
+            System.out.println("Adicionando solicitação na fila de solicitações do time para ser processada depois");
+            addRequestOnTeamRequestsQueue(team, request);
+        }
+    }
+
+    private void addRequestOnTeamRequestsQueue(Team team, Request request) {
         Queue<Request> requestQueue = team.getRequests();
         requestQueue.add(request);
         team.setRequests(requestQueue);
+    }
+
+    private void addRequestOnAttendantRequestsList(Attendant attendant, Request request) {
+        List<Request> attendantRequests = attendant.getRequests();
+        if (attendantRequests.size() < 3) {
+            System.out.println();
+            System.out.println("Direcionando solicitação para o atendente " + attendant.getName());
+            attendantRequests.add(request);
+            attendant.setRequests(attendantRequests);
+        }
     }
 }

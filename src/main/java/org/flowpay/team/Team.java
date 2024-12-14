@@ -49,4 +49,30 @@ public class Team {
     public void setRequests(Queue<Request> requests) {
         this.requests = requests;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return Objects.equals(id, team.id) &&
+                Objects.equals(department, team.department) &&
+                Objects.equals(attendants, team.attendants) &&
+                Objects.equals(requests, team.requests);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, department, attendants, requests);
+    }
+
+    @Override
+    public String toString() {
+        return "Time => {" +
+                "id=" + id +
+                ", departamento='" + department + '\'' +
+                ", atendentes=" + attendants +
+                ", solicitações=" + requests +
+                '}';
+    }
 }

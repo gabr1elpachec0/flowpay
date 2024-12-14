@@ -26,30 +26,52 @@ public class Main {
         while (true) {
             switch (currentStep) {
                 case MAIN_MENU -> {
+                    System.out.println();
                     System.out.println("Abrindo menu principal...");
                     currentStep = mainMenuHandler.handleMainMenu();
                 }
                 case ADMIN_LOGIN -> {
+                    System.out.println();
                     System.out.println("Abrindo formulario para login...");
                     currentStep = adminMenuHandler.handleAdminLogin();
                 }
                 case ADMIN_MENU -> {
+                    System.out.println();
                     System.out.println("Abrindo menu do admin...");
                     currentStep = adminMenuHandler.handleAdminMenu();
                 }
                 case ADMIN_TEAM_MENU -> {
+                    System.out.println();
                     System.out.println("Abrindo menu de times...");
                     currentStep = adminMenuHandler.handleAdminTeamMenu();
                 }
+                case CARDS_MENU -> {
+                    System.out.println();
+                    System.out.println("Abrindo menu do time Cartões...");
+                    currentStep = adminMenuHandler.handleAdminTeamOperationsMenu(cards);
+                }
+                case LOANS_MENU -> {
+                    System.out.println();
+                    System.out.println("Abrindo menu do time Empréstimos...");
+                    currentStep = adminMenuHandler.handleAdminTeamOperationsMenu(loans);
+                }
+                case OTHER_SUBJECTS_MENU -> {
+                    System.out.println();
+                    System.out.println("Abrindo menu do time Outros Assuntos...");
+                    currentStep = adminMenuHandler.handleAdminTeamOperationsMenu(othersSubjects);
+                }
                 case CUSTOMER_MENU -> {
+                    System.out.println();
                     System.out.println("Abrindo menu do cliente...");
                     currentStep = customerMenuHandler.handleCustomerMenu();
                 }
                 case CUSTOMER_REQUEST_MENU -> {
+                    System.out.println();
                     System.out.println("Abrindo formulário para novo chamado...");
                     currentStep = customerMenuHandler.handleCustomerRequest(teamsList);
                 }
                 default -> {
+                    System.out.println();
                     System.out.println("Encerrando o programa...");
                     System.exit(0);
                 }
