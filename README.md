@@ -35,5 +35,5 @@
     para a lista de atendimentos do atendente disponível.
 </p>
 <h2>Stack Utilizada</h2>
-<p>. Java</p>
+<p>. Java com JDK 17</p>
 <p>. JUnit para testes</p>

@@ -45,29 +45,7 @@ public class CustomerMenuHandler {
         return ProgramStep.CUSTOMER_MENU;
     }
 
-    private int getCustomerMenu(Scanner scanner) {
-        System.out.println("Selecione uma opção: ");
-        System.out.println("1. Abrir chamado");
-        System.out.println("2. Voltar para o menu principal");
-
-        List<Integer> validOptions = Arrays.asList(1, 2, 3);
-        int option = 0;
-
-        while (!validOptions.contains(option)) {
-            try {
-                System.out.print("Opção a selecionar (selecione um número): ");
-                option = scanner.nextInt();
-                scanner.nextLine();
-            } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 3.");
-                scanner.nextLine();
-            }
-        }
-
-        return option;
-    }
-
-    private Request registerRequest(Scanner scanner) {
+    public Request registerRequest(Scanner scanner) {
         System.out.println("Preencha os dados a seguir para criar solicitação:");
 
         System.out.print("Nome: ");
@@ -108,7 +86,7 @@ public class CustomerMenuHandler {
         return request;
     }
 
-    private void distributeRequest(Team team, Request request) {
+    public void distributeRequest(Team team, Request request) {
         List<Attendant> teamAttendants = team.getAttendants();
 
         if (!teamAttendants.isEmpty()) {
@@ -126,6 +104,28 @@ public class CustomerMenuHandler {
             System.out.println("Direcionando solicitação para fila de solicitações do time ");
             addRequestOnTeamRequestsQueue(team, request);
         }
+    }
+
+    private int getCustomerMenu(Scanner scanner) {
+        System.out.println("Selecione uma opção: ");
+        System.out.println("1. Abrir chamado");
+        System.out.println("2. Voltar para o menu principal");
+
+        List<Integer> validOptions = Arrays.asList(1, 2, 3);
+        int option = 0;
+
+        while (!validOptions.contains(option)) {
+            try {
+                System.out.print("Opção a selecionar (selecione um número): ");
+                option = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException ex) {
+                System.out.println("Digite um número de 1 a 3.");
+                scanner.nextLine();
+            }
+        }
+
+        return option;
     }
 
     private void addRequestOnTeamRequestsQueue(Team team, Request request) {

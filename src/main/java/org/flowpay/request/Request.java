@@ -6,18 +6,19 @@ import java.util.UUID;
 public class Request {
     private UUID id;
     private String description;
-    private String status;
     private String type;
     private String customerName;
-
-    public Request() {
-    }
-
-    ;
 
     public Request(String description, String customerName) {
         this.id = UUID.randomUUID();
         this.description = description;
+        this.customerName = customerName;
+    }
+
+    public Request(String description, String type, String customerName) {
+        this.id = UUID.randomUUID();
+        this.description = description;
+        this.type = type;
         this.customerName = customerName;
     }
 
