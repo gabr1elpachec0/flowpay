@@ -86,11 +86,11 @@ public class AdminMenuHandler {
 
         while (!validOptions.contains(option)) {
             try {
-                System.out.print("Opção a selecionar (selecione um número): ");
+                System.out.print("Opcao a selecionar (selecione um numero): ");
                 option = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 2.");
+                System.out.println("Digite um numero de 1 a 2.");
                 scanner.nextLine();
             }
         }
@@ -111,7 +111,7 @@ public class AdminMenuHandler {
 
         while (!validOptions.contains(option)) {
             try {
-                System.out.print("Opção a selecionar (selecione um numero): ");
+                System.out.print("Opcao a selecionar (selecione um numero): ");
                 option = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException ex) {
@@ -148,12 +148,6 @@ public class AdminMenuHandler {
     }
 
     private ProgramStep handleRegisterTeamAttendant(Team team) {
-        registerTeamAttendant(team);
-
-        return ProgramStep.ADMIN_TEAM_MENU;
-    }
-
-    private void registerTeamAttendant(Team team) {
         System.out.println();
         System.out.println("Time " + team.getDepartment() + " => Registrar atendente:");
 
@@ -176,6 +170,8 @@ public class AdminMenuHandler {
             System.out.println("Retirando solicitacao da fila do time e inserindo na lista do atendente...");
             attendantRequests.add(requestToBeAddedIntoAttendantRequestsList);
         }
+
+        return ProgramStep.ADMIN_TEAM_MENU;
     }
 
     private ProgramStep handleListTeamAttendants(Scanner scanner, Team team) {
@@ -189,7 +185,7 @@ public class AdminMenuHandler {
     }
 
     private int getTeamAttendants(Scanner scanner, Team team) {
-        List<Attendant> teamAttendants = listTeamAttendants(team);
+        List<Attendant> teamAttendants = team.getAttendants();
 
         if (!teamAttendants.isEmpty()) {
             System.out.println();
@@ -221,10 +217,6 @@ public class AdminMenuHandler {
         System.out.println();
         System.out.println("Time " + team.getDepartment() + " esta sem atendentes");
         return 0;
-    }
-
-    private List<Attendant> listTeamAttendants(Team team) {
-        return team.getAttendants();
     }
 
     private ProgramStep getTeamAttendantRequests(Scanner scanner, Team team) {
