@@ -15,8 +15,8 @@ public class Main {
         MainMenuHandler mainMenuHandler = new MainMenuHandler(scanner);
         AdminMenuHandler adminMenuHandler = new AdminMenuHandler(scanner);
 
-        Team cards = new Team("Cartões");
-        Team loans = new Team("Empréstimos");
+        Team cards = new Team("Cartoes");
+        Team loans = new Team("Emprestimos");
         Team othersSubjects = new Team("Outros Assuntos");
         List<Team> teamsList = Arrays.asList(cards, loans, othersSubjects);
 
@@ -47,12 +47,12 @@ public class Main {
                 }
                 case CARDS_MENU -> {
                     System.out.println();
-                    System.out.println("Abrindo menu do time Cartões...");
+                    System.out.println("Abrindo menu do time Cartoes...");
                     currentStep = adminMenuHandler.handleAdminTeamOperationsMenu(cards);
                 }
                 case LOANS_MENU -> {
                     System.out.println();
-                    System.out.println("Abrindo menu do time Empréstimos...");
+                    System.out.println("Abrindo menu do time Emprestimos...");
                     currentStep = adminMenuHandler.handleAdminTeamOperationsMenu(loans);
                 }
                 case OTHER_SUBJECTS_MENU -> {
@@ -67,7 +67,7 @@ public class Main {
                 }
                 case CUSTOMER_REQUEST_MENU -> {
                     System.out.println();
-                    System.out.println("Abrindo formulário para novo chamado...");
+                    System.out.println("Abrindo formulario para novo chamado...");
                     currentStep = customerMenuHandler.handleCustomerRequest(teamsList);
                 }
                 default -> {
