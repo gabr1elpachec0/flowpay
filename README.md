@@ -34,3 +34,6 @@
     . Caso o time possua atendente e este não esteja ocupado, a solicitação não cairá na fila geral, ou seja, irá direto
     para a lista de atendimentos do atendente disponível.
 </p>
+<h2>Stack Utilizada</h2>
+<p>. Java</p>
+<p>. JUnit para testes</p>
