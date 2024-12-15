@@ -72,7 +72,7 @@ public class Team {
                 "id=" + id +
                 ", departamento='" + department + '\'' +
                 ", atendentes=" + attendants +
-                ", solicitações=" + requests +
+                ", solicitacoes=" + requests +
                 '}';
     }
 }
