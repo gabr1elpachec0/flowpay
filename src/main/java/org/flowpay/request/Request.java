@@ -72,9 +72,9 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Solicitação => {" +
+        return "Solicitacao => {" +
                 "id=" + id +
-                ", descrição='" + description + '\'' +
+                ", descricao='" + description + '\'' +
                 ", tipo='" + type + '\'' +
                 ", cliente='" + customerName + '\'' +
                 '}';
