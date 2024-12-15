@@ -27,10 +27,10 @@
     Clientes podem abrir chamados sobre algum problema específico. Então, esses chamados serão transferidos a fila de 
     algum time.
     <br />
-    Caso o time não possua nenhum atendente, a solicitação aberta irá para a fila geral do time.
+    . Caso o time não possua nenhum atendente, a solicitação aberta irá para a fila geral do time.
     <br />
-    Caso o time possua atendente, mas este esteja ocupado, a solicitação também irá para a fila geral do time.
+    . Caso o time possua atendente, mas este esteja ocupado, a solicitação também irá para a fila geral do time.
     <br />
-    Caso o time possua atendente e este não esteja ocupado, a solicitação não cairá na fila geral, ou seja, irá direto
+    . Caso o time possua atendente e este não esteja ocupado, a solicitação não cairá na fila geral, ou seja, irá direto
     para a lista de atendimentos do atendente disponível.
 </p>
