@@ -18,7 +18,7 @@
     A solução não utiliza nenhuma API e os dados não são persistidos em banco de dados.
     Portanto, ao parar a execução do programa os dados são perdidos e é necessário realizar o processo novamente.
     <br>
-    O foco foi aplicar conceitos de Clean Code e de testes, mas de forma a manter a mira no problema principal.
+    O foco foi tentar aplicar conceitos de Clean Code e de testes, mas de forma a manter a mira no problema principal.
 </p>
 <h2>Como funciona?</h2>
 <p>
@@ -36,4 +36,10 @@
 </p>
 <h2>Stack Utilizada</h2>
 <p>. Java com JDK 17</p>
-<p>. JUnit para testes</p>
+<p>. Groovy + Spock para testes</p>
+<h2>Para rodar o programa</h2>
+<p>
+    Para rodar, basta clonar o repositório e rodar a classe Main do projeto.
+    <br />
+    A senha para administradores da FlowPay é admin, como está no código.
+</p>
