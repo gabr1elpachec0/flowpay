@@ -167,6 +167,15 @@ public class AdminMenuHandler {
         team.setAttendants(teamAttendants);
 
         System.out.println("Atendente adicionado ao time " + team.getDepartment());
+
+        List<Request> attendantRequests = newAttendant.getRequests();
+
+        while (canTranferRequest(attendantRequests, team)) {
+            Queue<Request> teamRequests = team.getRequests();
+            Request requestToBeAddedIntoAttendantRequestsList = teamRequests.poll();
+            System.out.println("Retirando solicitação da fila do time e inserindo na lista do atendente...");
+            attendantRequests.add(requestToBeAddedIntoAttendantRequestsList);
+        }
     }
 
     private ProgramStep handleListTeamAttendants(Scanner scanner, Team team) {
@@ -298,11 +307,9 @@ public class AdminMenuHandler {
 
         while (canTranferRequest(attendantRequests, team)) {
             Queue<Request> teamRequests = team.getRequests();
-            if (!teamRequests.isEmpty()) {
-                Request requestToBeAddedIntoAttendantRequestsList = teamRequests.poll();
-                System.out.println("Retirando solicitação da fila do time e inserindo na lista do atendente...");
-                attendantRequests.add(requestToBeAddedIntoAttendantRequestsList);
-            }
+            Request requestToBeAddedIntoAttendantRequestsList = teamRequests.poll();
+            System.out.println("Retirando solicitação da fila do time e inserindo na lista do atendente...");
+            attendantRequests.add(requestToBeAddedIntoAttendantRequestsList);
         }
 
         return ProgramStep.ADMIN_TEAM_MENU;
