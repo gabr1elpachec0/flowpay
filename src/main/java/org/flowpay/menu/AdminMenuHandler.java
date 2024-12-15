@@ -61,12 +61,12 @@ public class AdminMenuHandler {
 
         while (!password.equalsIgnoreCase(ADM_FLOW_PAY_PASSWORD)) {
             if (counter == 5) {
-                System.out.println("Número máximo de tentativas atingido.");
+                System.out.println("Numero maximo de tentativas atingido.");
                 System.exit(0);
             }
             int times = 5 - counter;
             System.out.println();
-            System.out.println("Você possui " + times + " tentativa(s)");
+            System.out.println("Voce possui " + times + " tentativa(s)");
             System.out.print("Digite a senha para acessar: ");
             password = scanner.nextLine();
             counter++;
@@ -77,7 +77,7 @@ public class AdminMenuHandler {
 
     private int getAdminMenu(Scanner scanner) {
         System.out.println();
-        System.out.println("Selecione uma opção: ");
+        System.out.println("Selecione uma opcao: ");
         System.out.println("1. Times");
         System.out.println("2. Voltar para o menu principal");
 
@@ -100,9 +100,9 @@ public class AdminMenuHandler {
 
     private int getTeamMenu(Scanner scanner) {
         System.out.println();
-        System.out.println("Selecione uma opção: ");
-        System.out.println("1. Cartões");
-        System.out.println("2. Empréstimos");
+        System.out.println("Selecione uma opcao: ");
+        System.out.println("1. Cartoes");
+        System.out.println("2. Emprestimos");
         System.out.println("3. Outros Assuntos");
         System.out.println("4. Voltar para o menu");
 
@@ -111,11 +111,11 @@ public class AdminMenuHandler {
 
         while (!validOptions.contains(option)) {
             try {
-                System.out.print("Opção a selecionar (selecione um número): ");
+                System.out.print("Opção a selecionar (selecione um numero): ");
                 option = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 4.");
+                System.out.println("Digite um numero de 1 a 4.");
                 scanner.nextLine();
             }
         }
@@ -125,7 +125,7 @@ public class AdminMenuHandler {
 
     private int getTeamOptionsMenu(Scanner scanner, Team team) {
         System.out.println();
-        System.out.println("Time " + team.getDepartment() + " => Selecione uma opção: ");
+        System.out.println("Time " + team.getDepartment() + " => Selecione uma opcao: ");
         System.out.println("1. Cadastrar novo atendente");
         System.out.println("2. Ver atendentes");
         System.out.println("3. Voltar para o menu");
@@ -135,11 +135,11 @@ public class AdminMenuHandler {
 
         while (!validOptions.contains(option)) {
             try {
-                System.out.print("Opção a selecionar (selecione um número): ");
+                System.out.print("Opcao a selecionar (selecione um numero): ");
                 option = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 3.");
+                System.out.println("Digite um numero de 1 a 3.");
                 scanner.nextLine();
             }
         }
@@ -170,10 +170,10 @@ public class AdminMenuHandler {
 
         List<Request> attendantRequests = newAttendant.getRequests();
 
-        while (canTranferRequest(attendantRequests, team)) {
+        while (canTransferRequest(attendantRequests, team)) {
             Queue<Request> teamRequests = team.getRequests();
             Request requestToBeAddedIntoAttendantRequestsList = teamRequests.poll();
-            System.out.println("Retirando solicitação da fila do time e inserindo na lista do atendente...");
+            System.out.println("Retirando solicitacao da fila do time e inserindo na lista do atendente...");
             attendantRequests.add(requestToBeAddedIntoAttendantRequestsList);
         }
     }
@@ -197,20 +197,20 @@ public class AdminMenuHandler {
             System.out.println(teamAttendants);
             System.out.println();
 
-            System.out.println("Deseja ver as solicitações de algum atendente?");
+            System.out.println("Deseja ver as solicitacoes de algum atendente?");
             System.out.println("1. Sim");
-            System.out.println("2. Não");
+            System.out.println("2. Nao");
 
             List<Integer> validOptions = Arrays.asList(1, 2);
             int option = 0;
 
             while (!validOptions.contains(option)) {
                 try {
-                    System.out.print("Opção a selecionar (selecione um número): ");
+                    System.out.print("Opcao a selecionar (selecione um numero): ");
                     option = scanner.nextInt();
                     scanner.nextLine();
                 } catch (InputMismatchException ex) {
-                    System.out.println("Digite um número de 1 a 2.");
+                    System.out.println("Digite um numero de 1 a 2.");
                     scanner.nextLine();
                 }
             }
@@ -219,7 +219,7 @@ public class AdminMenuHandler {
         }
 
         System.out.println();
-        System.out.println("Time " + team.getDepartment() + " está sem atendentes");
+        System.out.println("Time " + team.getDepartment() + " esta sem atendentes");
         return 0;
     }
 
@@ -246,10 +246,10 @@ public class AdminMenuHandler {
                 return listAttendantRequests(attendant, team);
             } else {
                 System.out.println();
-                System.out.println("Atendente não encontrado!");
+                System.out.println("Atendente nao encontrado!");
             }
         } catch (IllegalArgumentException ex) {
-            System.out.println("Identificador inválido. Retornando ao menu de times...");
+            System.out.println("Identificador invalido. Retornando ao menu de times...");
         }
         return ProgramStep.ADMIN_TEAM_MENU;
     }
@@ -265,27 +265,27 @@ public class AdminMenuHandler {
                 return completeAttendantRequest(scanner, attendantRequests, team);
             }
         } else {
-            System.out.println("Sem solicitações para o atendente " + attendant.getName());
+            System.out.println("Sem solicitacoes para o atendente " + attendant.getName());
         }
 
         return ProgramStep.ADMIN_TEAM_MENU;
     }
 
     private int handleAttendantRequest() {
-        System.out.println("Deseja finalizar alguma solicitação?");
+        System.out.println("Deseja finalizar alguma solicitacao?");
         System.out.println("1. Sim");
-        System.out.println("2. Não");
+        System.out.println("2. Nao");
 
         List<Integer> validOptions = Arrays.asList(1, 2);
         int option = 0;
 
         while (!validOptions.contains(option)) {
             try {
-                System.out.print("Opção a selecionar (selecione um número): ");
+                System.out.print("Opção a selecionar (selecione um numero): ");
                 option = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 2.");
+                System.out.println("Digite um numero de 1 a 2.");
                 scanner.nextLine();
             }
         }
@@ -294,28 +294,28 @@ public class AdminMenuHandler {
     }
 
     private ProgramStep completeAttendantRequest(Scanner scanner, List<Request> attendantRequests, Team team) {
-        System.out.print("Copie e cole o identificador da solicitação: ");
+        System.out.print("Copie e cole o identificador da solicitacao: ");
         UUID attendantRequestId = UUID.fromString(scanner.nextLine());
 
         for (int i = 0; i < attendantRequests.size(); i++) {
             Request attendantRequest = attendantRequests.get(i);
             if (attendantRequest.getId().equals(attendantRequestId)) {
-                System.out.println("Concluindo solicitação do cliente " + attendantRequest.getCustomerName());
+                System.out.println("Concluindo solicitacao do cliente " + attendantRequest.getCustomerName());
                 attendantRequests.remove(attendantRequest);
             }
         }
 
-        while (canTranferRequest(attendantRequests, team)) {
+        while (canTransferRequest(attendantRequests, team)) {
             Queue<Request> teamRequests = team.getRequests();
             Request requestToBeAddedIntoAttendantRequestsList = teamRequests.poll();
-            System.out.println("Retirando solicitação da fila do time e inserindo na lista do atendente...");
+            System.out.println("Retirando solicitacao da fila do time e inserindo na lista do atendente...");
             attendantRequests.add(requestToBeAddedIntoAttendantRequestsList);
         }
 
         return ProgramStep.ADMIN_TEAM_MENU;
     }
 
-    private boolean canTranferRequest(List<Request> attendantRequests, Team team) {
+    private boolean canTransferRequest(List<Request> attendantRequests, Team team) {
         Queue<Request> teamRequests = team.getRequests();
         return attendantRequests.size() < 3 && !teamRequests.isEmpty();
     }

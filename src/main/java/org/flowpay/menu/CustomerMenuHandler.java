@@ -28,11 +28,11 @@ public class CustomerMenuHandler {
         Request request = registerRequest(scanner);
 
         switch (request.getType()) {
-            case "Cartões" -> {
+            case "Cartoes" -> {
                 distributeRequest(teamsList.get(0), request);
                 System.out.println("Chamado adicionado!");
             }
-            case "Empréstimos" -> {
+            case "Emprestimos" -> {
                 distributeRequest(teamsList.get(1), request);
                 System.out.println("Chamado adicionado!");
             }
@@ -45,15 +45,37 @@ public class CustomerMenuHandler {
         return ProgramStep.CUSTOMER_MENU;
     }
 
-    public Request registerRequest(Scanner scanner) {
-        System.out.println("Preencha os dados a seguir para criar solicitação:");
+    private int getCustomerMenu(Scanner scanner) {
+        System.out.println("Selecione uma opcao: ");
+        System.out.println("1. Abrir chamado");
+        System.out.println("2. Voltar para o menu principal");
+
+        List<Integer> validOptions = Arrays.asList(1, 2, 3);
+        int option = 0;
+
+        while (!validOptions.contains(option)) {
+            try {
+                System.out.print("Opcao a selecionar (selecione um numero): ");
+                option = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException ex) {
+                System.out.println("Digite um numero de 1 a 3.");
+                scanner.nextLine();
+            }
+        }
+
+        return option;
+    }
+
+    private Request registerRequest(Scanner scanner) {
+        System.out.println("Preencha os dados a seguir para criar solicitacao:");
 
         System.out.print("Nome: ");
         String customerName = scanner.nextLine();
 
         System.out.println("Selecione o tipo do problema: ");
-        System.out.println("1. Cartões");
-        System.out.println("2. Empréstimo");
+        System.out.println("1. Cartoes");
+        System.out.println("2. Emprestimo");
         System.out.println("3. Outros Assuntos");
 
         List<Integer> validOptions = Arrays.asList(1, 2, 3);
@@ -61,11 +83,11 @@ public class CustomerMenuHandler {
 
         while (!validOptions.contains(problemType)) {
             try {
-                System.out.print("Opção a selecionar (selecione um número): ");
+                System.out.print("Opcao a selecionar (selecione um numero): ");
                 problemType = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 3.");
+                System.out.println("Digite um numero de 1 a 3.");
                 scanner.nextLine();
             }
         }
@@ -76,9 +98,9 @@ public class CustomerMenuHandler {
         Request request = new Request(problemDescription, customerName);
 
         if (problemType == 1) {
-            request.setType("Cartões");
+            request.setType("Cartoes");
         } else if (problemType == 2) {
-            request.setType("Empréstimos");
+            request.setType("Emprestimos");
         } else if (problemType == 3) {
             request.setType("Outros Assuntos");
         }
@@ -86,7 +108,7 @@ public class CustomerMenuHandler {
         return request;
     }
 
-    public void distributeRequest(Team team, Request request) {
+    private void distributeRequest(Team team, Request request) {
         List<Attendant> teamAttendants = team.getAttendants();
 
         if (!teamAttendants.isEmpty()) {
@@ -95,37 +117,15 @@ public class CustomerMenuHandler {
                     addRequestOnAttendantRequestsList(attendant, request);
                 } else {
                     System.out.println();
-                    System.out.println("Direcionando solicitação para fila de solicitações do time ");
+                    System.out.println("Direcionando solicitacao para fila de solicitacoes do time ");
                     addRequestOnTeamRequestsQueue(team, request);
                 }
             }
         } else {
             System.out.println();
-            System.out.println("Direcionando solicitação para fila de solicitações do time ");
+            System.out.println("Direcionando solicitacao para fila de solicitacoes do time ");
             addRequestOnTeamRequestsQueue(team, request);
         }
-    }
-
-    private int getCustomerMenu(Scanner scanner) {
-        System.out.println("Selecione uma opção: ");
-        System.out.println("1. Abrir chamado");
-        System.out.println("2. Voltar para o menu principal");
-
-        List<Integer> validOptions = Arrays.asList(1, 2, 3);
-        int option = 0;
-
-        while (!validOptions.contains(option)) {
-            try {
-                System.out.print("Opção a selecionar (selecione um número): ");
-                option = scanner.nextInt();
-                scanner.nextLine();
-            } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 3.");
-                scanner.nextLine();
-            }
-        }
-
-        return option;
     }
 
     private void addRequestOnTeamRequestsQueue(Team team, Request request) {
@@ -137,7 +137,7 @@ public class CustomerMenuHandler {
     private void addRequestOnAttendantRequestsList(Attendant attendant, Request request) {
         List<Request> attendantRequests = attendant.getRequests();
         System.out.println();
-        System.out.println("Direcionando solicitação para o atendente " + attendant.getName());
+        System.out.println("Direcionando solicitacao para o atendente " + attendant.getName());
         attendantRequests.add(request);
         attendant.setRequests(attendantRequests);
     }

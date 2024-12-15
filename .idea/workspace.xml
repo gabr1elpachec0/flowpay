@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="579f55dc-9737-4c5b-81b2-5f83cd5b8599" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/flowpay/ScannerWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/groovy/menu/CustomerMenuHandlerTest.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/groovy/menu/MainMenuHandlerTest.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/groovy/menu/AdminMenuHandlerTest.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/flowpay/menu/CustomerMenuHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/flowpay/menu/CustomerMenuHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/flowpay/request/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/flowpay/request/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +106,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.CustomerMenuHandlerTest.should handle customer request correctly when registering a request">
+  <component name="RunManager" selected="Gradle.CustomerMenuHandlerTest">
     <configuration name="CustomerMenuHandlerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -238,8 +229,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.CustomerMenuHandlerTest.should handle customer request correctly when registering a request" />
         <item itemvalue="Gradle.CustomerMenuHandlerTest" />
+        <item itemvalue="Gradle.CustomerMenuHandlerTest.should handle customer request correctly when registering a request" />
         <item itemvalue="Gradle.MainMenuHandlerTest" />
         <item itemvalue="Gradle.MainMenuHandlerTest.should render some step when selecting an option" />
         <item itemvalue="Gradle.MainMenuHandlerTest.should render admin login when selecting first option" />

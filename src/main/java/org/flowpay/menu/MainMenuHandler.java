@@ -28,12 +28,12 @@ public class MainMenuHandler {
     private int getMainMenu(Scanner scanner) {
         System.out.println();
         System.out.println("-------------------");
-        System.out.println("BEM-VINDO À FLOWPAY");
+        System.out.println("BEM-VINDO A FLOWPAY");
         System.out.println("-------------------");
 
-        System.out.println("Para prosseguir, escolha uma opção:");
-        System.out.println("1. Abrir FlowPay => Opção para funcionários FlowPay");
-        System.out.println("2. Abrir chamado => Opção para clientes FlowPay");
+        System.out.println("Para prosseguir, escolha uma opcao:");
+        System.out.println("1. Abrir FlowPay => Opcao para funcionarios FlowPay");
+        System.out.println("2. Abrir chamado => Opcao para clientes FlowPay");
         System.out.println("3. Sair");
 
         List<Integer> validOptions = Arrays.asList(1, 2, 3);
@@ -41,11 +41,11 @@ public class MainMenuHandler {
 
         while (!validOptions.contains(option)) {
             try {
-                System.out.print("Opção a selecionar (selecione um número): ");
+                System.out.print("Opcao a selecionar (selecione um numero): ");
                 option = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException ex) {
-                System.out.println("Digite um número de 1 a 3.");
+                System.out.println("Digite um numero de 1 a 3.");
                 scanner.nextLine();
             }
         }
